@@ -1,0 +1,7 @@
+waitress
+flask
+flask_sqlalchemy
+flask_login
+werkzeug
+pillow
+opencv-python

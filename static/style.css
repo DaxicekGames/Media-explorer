@@ -1,0 +1,116 @@
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-text: #e0e0e0;
+    --secondary-text: #a0a0a0;
+    --accent-color: #6b9fff;
+    --accent-hover: #506ff8;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --danger-color: #cf6679;
+    --border-radius: 12px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-drag: none;}
+html { scroll-behavior: smooth; }
+html, body {touch-action: pan-x pan-y;}
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6; color: var(--primary-text);
+    background-color: rgb(160, 183, 211); background-size: cover; background-repeat: no-repeat;
+    background-image: url(bg.png); background-attachment: fixed; background-position: center;
+}
+header { text-align: center; padding: 2rem 1rem; position: relative; }
+h1 { font-size: 2.5rem; font-weight: 700; }
+.header-user-info { position: absolute; top: 1rem; right: 1rem; display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; }
+.logout-button {
+    background: var(--accent-color); color: #000; text-decoration: none; font-weight: 700;
+    padding: 0.5rem 1rem; border-radius: 8px; transition: background-color 0.2s ease;
+}
+.logout-button:hover { background-color: var(--accent-hover); } 
+main { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+/* Login Page */
+.login-page { display: flex; justify-content: center; align-items: center; flex-direction: column; min-height: 100vh; }
+.login-container {
+    width: 100%;
+    max-width: 440px; 
+    padding: 1rem;
+}
+.login-box { background: var(--surface-color); padding: 2.5rem; border-radius: var(--border-radius); box-shadow: 0 10px 30px var(--shadow-color); text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+.login-subtitle { color: var(--secondary-text); margin-bottom: 2rem; }
+.input-group { margin-bottom: 1.5rem; text-align: left; }
+.input-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--secondary-text); }
+.input-group input { width: 100%; padding: 0.8rem; background: var(--bg-color); border: 1px solid #333; border-radius: 8px; color: var(--primary-text); font-size: 1rem; transition: border-color 0.2s, box-shadow 0.2s; }
+.input-group input:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2); }
+.remember-group { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.login-button { width: 100%; padding: 0.9rem; border: none; background: var(--accent-color); color: #000; font-size: 1rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: background-color 0.2s ease; }
+.login-button:hover { background-color: var(--accent-hover); }
+.flash-message { padding: 1rem; margin-bottom: 1rem; border-radius: 8px; }
+.flash-message.danger { background: var(--danger-color); color: #000; }
+.flash-message.info { background: #333; color: var(--primary-text); }
+/* Accordion */
+.accordion-item { background-color: var(--surface-color); margin-bottom: 1rem; border-radius: var(--border-radius); box-shadow: 0 4px 15px var(--shadow-color); }
+.accordion-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; cursor: pointer; user-select: none; }
+.accordion-header h2 { font-size: 1.4rem; font-weight: 500; }
+.header-controls { display: flex; align-items: center; gap: 1.5rem; }
+.section-download { color: var(--secondary-text); text-decoration: none; transition: color 0.2s ease; }
+.section-download svg { width: 24px; height: 24px; fill: currentColor; }
+.section-download:hover { color: var(--accent-color); }
+.accordion-toggle { font-size: 1.5rem; transition: transform 0.4s ease; }
+.accordion-item.active > .accordion-header .accordion-toggle { transform: rotate(90deg); }
+.accordion-content-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease-out; }
+.accordion-item.active > .accordion-content-wrapper { grid-template-rows: 1fr; }
+.accordion-content { overflow: hidden; padding: 0 1rem; }
+.accordion-item.active > .accordion-content-wrapper > .accordion-content { padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
+.accordion-content .accordion-item { margin-left: 0; }
+/* Thumbnail Grid */
+.thumbnail-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px;}
+.thumbnail-item { position: relative; aspect-ratio: 1 / 1; background-color: #2a2a2a; border-radius: 8px; cursor: pointer; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+.thumbnail-item:hover { transform: scale(1.05); z-index: 10; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.thumbnail-item img { width: 100%; height: 100%; object-fit: cover; }
+.video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; pointer-events: none; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.7)); }
+.video-overlay svg { width: 35%; height: 35%; max-width: 44px; }
+/* Lightbox */
+.lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s 0.3s; }
+.lightbox.show { opacity: 1; visibility: visible; transition-delay: 0s; }
+.lightbox-backdrop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px) saturate(180%); }
+.lightbox-content { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.lightbox-top-bar { position: absolute; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); z-index: 1; }
+.lightbox-info { text-shadow: 1px 1px 3px var(--shadow-color); }
+.lightbox-info .filename { font-weight: 600; }
+.lightbox-info .metadata { font-size: 0.9rem; opacity: 0.8; }
+.lightbox-controls { display: flex; gap: 0.5rem; }
+.lightbox-zoom-btn, .lightbox-download, .lightbox-close { border: none; background: rgba(30,30,30,0.7); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: background 0.2s; }
+.lightbox-zoom-btn { font-size: 1.5rem; }
+.lightbox-download svg { width: 24px; height: 24px; fill: white; }
+.lightbox-close { font-size: 1.2rem; }
+.lightbox-zoom-btn:hover, .lightbox-download:hover, .lightbox-close:hover { background: rgba(0,0,0,0.7); }
+.media-wrapper { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; padding: 70px 80px 30px; }
+.media-wrapper img, .media-wrapper video { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px var(--shadow-color); transition: opacity 0.2s ease-in-out, scale 0.1s ease; -webkit-user-drag: none; -moz-user-select: none; user-select: none;}
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 3rem; color: white; cursor: pointer; user-select: none; z-index: 1001; background-color: rgba(0,0,0,0.2); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s, opacity 0.2s; }
+.lightbox-nav:hover { background-color: rgba(0,0,0,0.5); }
+.lightbox-nav.prev { left: 1rem; }
+.lightbox-nav.next { right: 1rem; }
+.lightbox-nav.hidden { opacity: 0; pointer-events: none; }
+.loader { border: 5px solid var(--surface-color); border-top: 5px solid var(--accent-color); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 4rem auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+footer { text-align: center; padding: 2rem; color: var(--secondary-text); font-size: 0.9rem; margin-top: 2rem; }
+
+@media (max-width: 600px) {
+    header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-bottom: 1rem;
+    }
+    .header-user-info {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        justify-content: center; }
+    .media-wrapper { padding: 60px 5px; }
+    .lightbox-nav.prev { left: 0.5rem; }
+    .lightbox-nav.next { right: 0.5rem; }
+
+    .thumbnail-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); }
+    .thumbnail-item { border-radius: 4px; }
+}
